@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
+import os
 
 from database import SessionLocal, engine, Base
 from models import User, Analise
@@ -9,7 +10,7 @@ from auth import hash_password, verify_password
 from interpretador import interpretar
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=os.path.join(os.getcwd(), "templates"))
 
 Base.metadata.create_all(bind=engine)
 
