@@ -1,4 +1,9 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 <h1>Nova Análise</h1>
+
 <form action="/calcular" method="post">
 P: <input name="p"><br>
 Argila: <input name="argila"><br>
@@ -10,5 +15,8 @@ CTC: <input name="ctc"><br>
 </form>
 
 {% if resultado %}
-<h2>Resultado: {{resultado}}</h2>
+<h2>Resultado: {{ resultado }}</h2>
 {% endif %}
+
+</body>
+</html>
