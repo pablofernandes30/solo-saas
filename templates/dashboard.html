@@ -1,0 +1,14 @@
+<h1>Nova Análise</h1>
+<form action="/calcular" method="post">
+P: <input name="p"><br>
+Argila: <input name="argila"><br>
+Ca: <input name="ca"><br>
+Mg: <input name="mg"><br>
+K: <input name="k"><br>
+CTC: <input name="ctc"><br>
+<button type="submit">Calcular</button>
+</form>
+
+{% if resultado %}
+<h2>Resultado: {{resultado}}</h2>
+{% endif %}
