@@ -25,11 +25,7 @@ def get_db():
 
 @app.get("/", response_class=HTMLResponse)
 def login_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="login.html",
-        context={}
-    )
+    return templates.TemplateResponse("login.html", {"request": request})
 
 @app.post("/login")
 def login(request: Request, email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
@@ -44,11 +40,7 @@ def login(request: Request, email: str = Form(...), password: str = Form(...), d
 
 @app.get("/register", response_class=HTMLResponse)
 def register_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="register.html",
-        context={}
-    )
+    return templates.TemplateResponse("register.html", {"request": request})
 
 @app.post("/register")
 def register(email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
@@ -59,11 +51,7 @@ def register(email: str = Form(...), password: str = Form(...), db: Session = De
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="dashboard.html",
-        context={}
-    )
+    return templates.TemplateResponse("dashboard.html", {"request": request})
 
 @app.post("/calcular", response_class=HTMLResponse)
 def calcular(request: Request,
@@ -82,8 +70,7 @@ def calcular(request: Request,
     db.add(analise)
     db.commit()
 
-    return templates.TemplateResponse(
-        request=request,
-        name="dashboard.html",
-        context={"resultado": resultado}
-    )
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request,
+        "resultado": resultado
+    })
