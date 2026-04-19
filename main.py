@@ -10,7 +10,9 @@ from auth import hash_password, verify_password
 from interpretador import interpretar
 
 app = FastAPI()
-templates = Jinja2Templates(directory=os.path.join(os.getcwd(), "templates"))
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 Base.metadata.create_all(bind=engine)
 
@@ -28,6 +30,7 @@ def login_page(request: Request):
 @app.post("/login")
 def login(request: Request, email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == email).first()
+
     if not user or not verify_password(password, user.password):
         return RedirectResponse("/", status_code=302)
 
